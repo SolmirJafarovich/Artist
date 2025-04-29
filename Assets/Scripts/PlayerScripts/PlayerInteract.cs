@@ -42,16 +42,38 @@ public class PlayerInteract : MonoBehaviour
         heldObject.transform.localPosition = Vector3.zero;
         heldObject.transform.localRotation = Quaternion.identity;
 
+        // Отключаем физику
         Rigidbody rb = heldObject.GetComponent<Rigidbody>();
-        if (rb != null) rb.isKinematic = true;
+        if (rb != null)
+        {
+            rb.isKinematic = true;
+            rb.detectCollisions = false; // Отключает столкновения
+        }
+
+        Collider col = heldObject.GetComponent<Collider>();
+        if (col != null)
+        {
+            col.isTrigger = true; // Проходит сквозь
+        }
     }
 
     public void DropHeldObject()
     {
         if (heldObject == null) return;
 
+        // Включаем физику
         Rigidbody rb = heldObject.GetComponent<Rigidbody>();
-        if (rb != null) rb.isKinematic = false;
+        if (rb != null)
+        {
+            rb.isKinematic = false;
+            rb.detectCollisions = true;
+        }
+
+        Collider col = heldObject.GetComponent<Collider>();
+        if (col != null)
+        {
+            col.isTrigger = false;
+        }
 
         heldObject.transform.SetParent(null);
         heldObject = null;
