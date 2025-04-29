@@ -1,31 +1,33 @@
 using UnityHFSM;
 using UnityEngine;
-using System.Collections.Generic;
-using Zenject;
 
 public class IntroState : BaseState
 {
     private CutsceneService cutsceneService;
-
-    [Inject]
-    private void Contstruct(CutsceneService _cutsceneService)
-    {
-        cutsceneService = _cutsceneService;
-        Debug.Log($"Success! Injection: {_cutsceneService}");
-    }
+    private bool isCutsceneStarted = false;
 
     public IntroState(GameStateMachine game) : base(game) {}
-    public string slidesFolder = "IntroSlides"; // Папка в Resources
 
-    private void StartCutscene()
-    {
-        this.cutsceneService.StartCutscene(slidesFolder);
-    }
+    public string slidesFolder = "IntroSlides"; // Папка в Resources
 
     public override void OnEnter()
     {
-        StartCutscene();
+        cutsceneService = Registry.Instance.GetCutsceneService();
+        Debug.Log($"Registered: {cutsceneService}");
+
+        cutsceneService.Init(slidesFolder);
+        isCutsceneStarted = true;
+
         Debug.Log($"Enter state: {this.GetType().Name}");
+    }
+
+    public override void OnLogic()
+    {
+        // Проверка: нажата ли левая кнопка мыши
+        if (isCutsceneStarted && Input.GetMouseButtonDown(0))
+        {
+            cutsceneService.NextSlide();
+        }
     }
 
     public override void OnExit()

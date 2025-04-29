@@ -5,7 +5,7 @@ public class GameStateMachine : MonoBehaviour
 {
     public StateMachine fsm;
 
-    private void Awake()
+    private void Start()
     {
         fsm = new StateMachine();
 
