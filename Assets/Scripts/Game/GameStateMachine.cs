@@ -5,9 +5,6 @@ public class GameStateMachine : MonoBehaviour
 {
     public StateMachine fsm;
 
-    [SerializeField] private CutsceneService cutsceneService;
-
-
     private void Awake()
     {
         fsm = new StateMachine();
