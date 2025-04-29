@@ -6287,6 +6287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 963194227}
   rayDistance: 100
+  Player: {fileID: 1038127051}
 --- !u!4 &1913766766
 Transform:
   m_ObjectHideFlags: 0
