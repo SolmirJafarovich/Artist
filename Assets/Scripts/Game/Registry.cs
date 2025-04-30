@@ -1,39 +1,53 @@
-using UnityEngine;
 using System;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class Registry
+public class Registry : MonoBehaviour
 {
     private static Registry _instance;
-    private static readonly object _lock = new object();
-
-    private CutsceneService _cutsceneService;
-
-    // Приватный конструктор для предотвращения создания экземпляров
-    private Registry() {}
-
-    // Свойство для доступа к экземпляру
     public static Registry Instance
     {
         get
         {
-            // Используем блокировку для безопасности в многозадачности
-            lock (_lock)
+            if (_instance == null)
             {
-                if (_instance == null)
-                {
-                    _instance = new Registry();
-                }
-                return _instance;
+                var obj = new GameObject("Registry");
+                _instance = obj.AddComponent<Registry>();
+                DontDestroyOnLoad(obj);
             }
+            return _instance;
         }
     }
-    public void SetCutsceneService(CutsceneService cutsceneService)
+
+    private readonly Dictionary<Type, object> _services = new();
+
+    // Регистрация сервиса
+    public void Register<T>(T service) where T : class
     {
-        _cutsceneService = cutsceneService;
+        var type = typeof(T);
+        if (_services.ContainsKey(type))
+        {
+            Debug.LogWarning($"Service {type} is already registered. Overwriting.");
+        }
+        _services[type] = service;
     }
 
-    public CutsceneService GetCutsceneService()
+    // Получение сервиса
+    public T Get<T>() where T : class
     {
-        return _cutsceneService;
+        var type = typeof(T);
+        if (_services.TryGetValue(type, out var service))
+        {
+            return service as T;
+        }
+
+        Debug.LogError($"Service of type {type} is not registered.");
+        return null;
+    }
+
+    // Очистка (например, при перезапуске игры)
+    public void Clear()
+    {
+        _services.Clear();
     }
 }

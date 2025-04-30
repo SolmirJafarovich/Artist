@@ -4,21 +4,29 @@ using UnityEngine;
 public class IntroState : BaseState
 {
     private CutsceneService cutsceneService;
+    private HideService showUI;
     private bool isCutsceneStarted = false;
 
     public IntroState(GameStateMachine game) : base(game) {}
 
     public string slidesFolder = "IntroSlides"; // Папка в Resources
 
+    public void InitUI()
+    {
+        showUI = Registry.Instance.Get<HideService>();
+        showUI.Dot(false);
+        showUI.Cutscene(true);
+    }
+
     public override void OnEnter()
     {
-        cutsceneService = Registry.Instance.GetCutsceneService();
-        Debug.Log($"Registered: {cutsceneService}");
-
+        InitUI();
+        cutsceneService = Registry.Instance.Get<CutsceneService>();
+        cutsceneService.OnCutsceneFinished += HandleCutsceneFinish;
         cutsceneService.Init(slidesFolder);
         isCutsceneStarted = true;
 
-        Debug.Log($"Enter state: {this.GetType().Name}");
+        cutsceneService.NextSlide();
     }
 
     public override void OnLogic()
@@ -30,8 +38,16 @@ public class IntroState : BaseState
         }
     }
 
+    private void HandleCutsceneFinish()
+    {
+        game.fsm.RequestStateChange("Explore");
+    }
+
     public override void OnExit()
     {
         Debug.Log($"Exit state: {this.GetType().Name}");
+        showUI.Cutscene(false);
+        showUI.Dot(true);
+        cutsceneService.OnCutsceneFinished -= HandleCutsceneFinish;
     }
 }
