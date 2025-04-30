@@ -5,13 +5,15 @@ public class GameStateMachine : MonoBehaviour
 {
     public StateMachine fsm;
 
-    private void Awake()
+    private void Start()
     {
         fsm = new StateMachine();
 
         fsm.AddState("Intro", new IntroState(this));
+        fsm.AddState("Explore", new ExploreState(this));
+        fsm.AddState("TillEvening", new TillEveningState(this));
 
-        fsm.SetStartState("Intro");
+        fsm.SetStartState("TillEvening");
 
         fsm.Init();
     }

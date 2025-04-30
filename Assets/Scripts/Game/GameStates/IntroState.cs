@@ -1,35 +1,53 @@
 using UnityHFSM;
 using UnityEngine;
-using System.Collections.Generic;
-using Zenject;
 
 public class IntroState : BaseState
 {
     private CutsceneService cutsceneService;
-
-    [Inject]
-    private void Contstruct(CutsceneService _cutsceneService)
-    {
-        cutsceneService = _cutsceneService;
-        Debug.Log($"Success! Injection: {_cutsceneService}");
-    }
+    private HideService showUI;
+    private bool isCutsceneStarted = false;
 
     public IntroState(GameStateMachine game) : base(game) {}
+
     public string slidesFolder = "IntroSlides"; // Папка в Resources
 
-    private void StartCutscene()
+    public void InitUI()
     {
-        this.cutsceneService.StartCutscene(slidesFolder);
+        showUI = Registry.Instance.Get<HideService>();
+        showUI.Dot(false);
+        showUI.Cutscene(true);
     }
 
     public override void OnEnter()
     {
-        StartCutscene();
-        Debug.Log($"Enter state: {this.GetType().Name}");
+        InitUI();
+        cutsceneService = Registry.Instance.Get<CutsceneService>();
+        cutsceneService.OnCutsceneFinished += HandleCutsceneFinish;
+        cutsceneService.Init(slidesFolder);
+        isCutsceneStarted = true;
+
+        cutsceneService.NextSlide();
+    }
+
+    public override void OnLogic()
+    {
+        // Проверка: нажата ли левая кнопка мыши
+        if (isCutsceneStarted && Input.GetMouseButtonDown(0))
+        {
+            cutsceneService.NextSlide();
+        }
+    }
+
+    private void HandleCutsceneFinish()
+    {
+        game.fsm.RequestStateChange("Explore");
     }
 
     public override void OnExit()
     {
         Debug.Log($"Exit state: {this.GetType().Name}");
+        showUI.Cutscene(false);
+        showUI.Dot(true);
+        cutsceneService.OnCutsceneFinished -= HandleCutsceneFinish;
     }
 }
