@@ -3,6 +3,8 @@ using UnityHFSM;
 
 public class GameStateMachine : MonoBehaviour
 {
+    [SerializeField] private string startState = "Intro";
+
     public StateMachine fsm;
 
     private void Start()
@@ -13,7 +15,7 @@ public class GameStateMachine : MonoBehaviour
         fsm.AddState("Explore", new ExploreState(this));
         fsm.AddState("TillEvening", new TillEveningState(this));
 
-        fsm.SetStartState("TillEvening");
+        fsm.SetStartState(startState);
 
         fsm.Init();
     }
