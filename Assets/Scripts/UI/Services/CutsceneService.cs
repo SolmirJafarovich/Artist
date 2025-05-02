@@ -22,8 +22,6 @@ public class CutsceneService : MonoBehaviour
     private Coroutine currentCoroutine;
     private Dictionary<string, Subtitle> subtitlesDict;
 
-    public event Action OnCutsceneFinished;
-
     private void Awake()
     {
         Registry.Instance.Register(this);
@@ -95,7 +93,7 @@ public class CutsceneService : MonoBehaviour
         currentSlideIndex = 0;
     }
 
-    public void NextSlide()
+    public bool NextSlide()
     {
         if (currentSlideIndex < slides.Count)
         {
@@ -106,10 +104,14 @@ public class CutsceneService : MonoBehaviour
             // Fade-in animation
             slideshowImage.enabled = true;
             currentSlideIndex++;
+
+            return true;
         }
         else
         {
             Stop();
+
+            return false;
         }
     }
 
@@ -128,7 +130,5 @@ public class CutsceneService : MonoBehaviour
         slides.Clear();
         currentSlideIndex = 0;
         slideshowImage.enabled = false;
-
-        OnCutsceneFinished?.Invoke();
     }
 }

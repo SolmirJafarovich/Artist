@@ -7,6 +7,9 @@ public class CameraCenterTrigger : MonoBehaviour
     public float rayDistance = 100f;  // Дистанция, на которую будет отправляться луч
     public Transform Player;   // Трансформ игрока
 
+    public delegate void CenterDotClickHandler(Collider collider);
+    public static event CenterDotClickHandler OnCenterDotClick;
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0)) // Левый клик мыши
@@ -38,6 +41,8 @@ public class CameraCenterTrigger : MonoBehaviour
 
         if (distance < 5)
         {
+            OnCenterDotClick?.Invoke(collider);
+            
             if (collider.GetComponent<opencloseDoor>() != null)
             {
                 opencloseDoor door = collider.GetComponent<opencloseDoor>();

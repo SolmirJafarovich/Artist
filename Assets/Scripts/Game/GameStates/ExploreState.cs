@@ -7,14 +7,10 @@ public class ExploreState : BaseState
 {
     public ExploreState(GameStateMachine game) : base(game) {}
 
-    private SubtitlesService subtitles;
-    private HideService showUI;
     private Coroutine currentCoroutine;
 
     public override void OnEnter()
     {
-        showUI = Registry.Instance.Get<HideService>();
-        subtitles = Registry.Instance.Get<SubtitlesService>();
         currentCoroutine = game.StartCoroutine(StateSequence());
     }
 
@@ -32,6 +28,9 @@ public class ExploreState : BaseState
 
         showUI.Subtitles(false);
 
+        yield return new WaitForSeconds(15f);
+
+        doorbell.Ring();
         yield return new WaitForSeconds(15f);
 
         game.fsm.RequestStateChange("TillEvening");

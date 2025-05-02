@@ -9,8 +9,8 @@ public class TillEveningState : BaseState
 
     private SubtitlesService subtitles;
     private HideService showUI;
-    private DoorbellService doorbell;
     private Coroutine currentCoroutine;
+
 
     private void InitUI()
     {
@@ -20,17 +20,19 @@ public class TillEveningState : BaseState
 
     public override void OnEnter()
     {
+        CameraCenterTrigger.OnCenterDotClick += HandleCenterClick;
         InitUI();
-        showUI = Registry.Instance.Get<HideService>();
         subtitles = Registry.Instance.Get<SubtitlesService>();
-        doorbell = Registry.Instance.Get<DoorbellService>();
-        currentCoroutine = game.StartCoroutine(StateSequence());
+        
     }
 
-    private IEnumerator StateSequence()
+    public void HandleCenterClick(Collider collider)
     {
-        doorbell.Ring();
-        yield return new WaitForSeconds(15f);
+        GameObject clickedObject = collider.gameObject;
+        if (clickedObject.name == "EntranceDoor")
+        {
+            Debug.Log("Это объект с именем EntranceDoor");
+        }
     }
 
     public override void OnLogic()
@@ -39,6 +41,8 @@ public class TillEveningState : BaseState
 
     public override void OnExit()
     {
+        CameraCenterTrigger.OnCenterDotClick -= HandleCenterClick;
+
         if (currentCoroutine != null)
         {
             game.StopCoroutine(currentCoroutine);
