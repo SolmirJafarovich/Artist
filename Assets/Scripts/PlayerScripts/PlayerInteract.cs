@@ -7,9 +7,15 @@ public class PlayerInteract : MonoBehaviour
     public Transform holdPoint;
 
     private GameObject heldObject;
+
+    private void Awake()
+    {
+        Registry.Instance.Register(this);
+    }
+
     void Update()
     {
-        if (Input.GetMouseButtonDown(1)) // ПКМ
+        if (Input.GetMouseButtonDown(1)) // пїЅпїЅпїЅ
         {
             if (IsInteractableInFront(out IInteractable interactable))
             {
@@ -50,18 +56,18 @@ public class PlayerInteract : MonoBehaviour
         heldObject.transform.localPosition = Vector3.zero;
         heldObject.transform.localRotation = Quaternion.identity;
 
-        // Отключаем физику
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         Rigidbody rb = heldObject.GetComponent<Rigidbody>();
         if (rb != null)
         {
             rb.isKinematic = true;
-            rb.detectCollisions = false; // Отключает столкновения
+            rb.detectCollisions = false; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         }
 
         Collider col = heldObject.GetComponent<Collider>();
         if (col != null)
         {
-            col.isTrigger = true; // Проходит сквозь
+            col.isTrigger = true; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         }
     }
 
@@ -69,13 +75,12 @@ public class PlayerInteract : MonoBehaviour
     {
         if (heldObject == null) return;
 
-        // Включаем физику
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         Rigidbody rb = heldObject.GetComponent<Rigidbody>();
         if (rb != null)
         {
             rb.isKinematic = false;
             rb.detectCollisions = true;
-            print("you are pickup object");
         }
 
         Collider col = heldObject.GetComponent<Collider>();

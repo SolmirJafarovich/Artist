@@ -15,13 +15,16 @@ public class Subtitle
 public class SubtitlesService : MonoBehaviour
 {
     [SerializeField] private TMP_Text subtitleText;
-    [SerializeField] private string jsonFilePath = "Subtitles/content"; // Resources path (no extension)
-    [SerializeField] private float typingSpeed = 0.08f; // seconds per character
+    [SerializeField] private string jsonFilePath = "Subtitles/content";
+    [SerializeField] private float typingSpeed = 0.08f;
 
-    private Coroutine currentCoroutine;
     private Dictionary<string, Subtitle> subtitlesDict;
+    private Queue<string> subtitleQueue = new();
+    private Coroutine processingCoroutine;
+    private bool isShowing = false;
 
     public event Action OnSubtitleFinished;
+
     private HideService showUI;
 
     private void Awake()
@@ -54,34 +57,44 @@ public class SubtitlesService : MonoBehaviour
 
     public void ShowSubtitleByKey(string key)
     {
-        showUI = Registry.Instance.Get<HideService>();
-        showUI.Subtitles(true);
-
-        Debug.Log($"subtitlesDict {subtitlesDict}");
         if (subtitlesDict == null || !subtitlesDict.ContainsKey(key))
         {
             Debug.LogWarning($"Subtitle with key '{key}' not found.");
             return;
         }
 
-        Subtitle subtitle = subtitlesDict[key];
+        subtitleQueue.Enqueue(key);
 
-        if (currentCoroutine != null)
-            StopCoroutine(currentCoroutine);
-
-        currentCoroutine = StartCoroutine(TypeText(subtitle.Text));
+        if (!isShowing)
+            processingCoroutine = StartCoroutine(ProcessQueue());
     }
 
-    private IEnumerator TypeText(string fullText)
+    private IEnumerator ProcessQueue()
     {
-        subtitleText.text = "";
+        isShowing = true;
+        showUI = Registry.Instance.Get<HideService>();
 
-        foreach (char c in fullText)
+        while (subtitleQueue.Count > 0)
         {
-            subtitleText.text += c;
-            yield return new WaitForSeconds(typingSpeed);
+            string key = subtitleQueue.Dequeue();
+            Subtitle subtitle = subtitlesDict[key];
+
+            showUI.Subtitles(true);
+            subtitleText.text = "";
+
+            foreach (char c in subtitle.Text)
+            {
+                subtitleText.text += c;
+                yield return new WaitForSeconds(typingSpeed);
+            }
+
+            OnSubtitleFinished?.Invoke();
+
+            // Небольшая пауза между субтитрами (опционально)
+            yield return new WaitForSeconds(1.0f);
         }
 
-        OnSubtitleFinished?.Invoke();
+        isShowing = false;
     }
 }
+

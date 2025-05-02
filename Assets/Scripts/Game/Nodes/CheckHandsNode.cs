@@ -17,14 +17,21 @@ public class CheckHandsNode : Unit
 
     public ValueInput item;
 
+    private PlayerInteract player;
+    private ItemService itemService;
+
     protected override void Definition()
     {
         inputTrigger = ControlInput("inputTrigger", (flow) => { 
-            // player.HasItem(item);
-            return outputTriggerTrue; 
+            player = Registry.Instance.Get<PlayerInteract>();
+            itemService = Registry.Instance.Get<ItemService>();
+            if(player.GetHeldObject() == itemService[flow.GetValue<PlotItem>(item)])
+                return outputTriggerTrue; 
+            else
+                return outputTriggerFalse;
         });
         outputTriggerTrue = ControlOutput("True");
         outputTriggerFalse = ControlOutput("False");
-        item = ValueInput<PlotItem>("PlotItem", PlotItem.EntranceDoor);
+        item = ValueInput<PlotItem>("PlotItem", PlotItem.FirstPaint);
     }
 }

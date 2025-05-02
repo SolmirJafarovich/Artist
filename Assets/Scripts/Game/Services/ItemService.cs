@@ -4,11 +4,7 @@ using UnityEngine;
 
 public enum PlotItem
 {
-    EntranceDoor,
-    Lamp,
-    AlarmPhone,
-    CutsceneIntro,
-    SubtitleOpening
+    FirstPaint
 }
 
 [Serializable]

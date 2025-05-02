@@ -53,7 +53,6 @@ public class CutsceneService : MonoBehaviour
 
     public void ShowSubtitleByKey(string key)
     {
-        Debug.Log($"subtitlesDict {subtitlesDict}");
         if (subtitlesDict == null || !subtitlesDict.ContainsKey(key))
         {
             Debug.LogWarning($"Subtitle with key '{key}' not found.");
