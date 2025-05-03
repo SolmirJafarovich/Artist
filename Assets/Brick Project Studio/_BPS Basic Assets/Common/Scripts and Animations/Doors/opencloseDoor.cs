@@ -1,11 +1,11 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace SojaExiles
 
 {
-	public class opencloseDoor : MonoBehaviour
+	public class opencloseDoor : MonoBehaviour, IInteractable
 	{
 
 		public Animator openandclose;
@@ -15,7 +15,7 @@ namespace SojaExiles
 			open = false;
 		}
 
-        public void toggle()
+        public void Interact(PlayerInteract player)
         {
             if (open == false)
             {
