@@ -7,19 +7,24 @@ public class DoorbellNode : Unit
 {
     [DoNotSerialize]
     public ControlInput inputTrigger;
+
     [DoNotSerialize]
     public ControlOutput outputTrigger;
-    [DoNotSerialize]
 
+    [DoNotSerialize]
     private DoorbellService doorbell;
 
     protected override void Definition()
     {
-        inputTrigger = ControlInput("inputTrigger", (flow) => { 
-            doorbell = Registry.Instance.Get<DoorbellService>();
-            doorbell.Ring();
-            return outputTrigger; 
-        });
+        inputTrigger = ControlInput(
+            "inputTrigger",
+            (flow) =>
+            {
+                doorbell = Registry.Instance.Get<DoorbellService>();
+                doorbell.Ring();
+                return outputTrigger;
+            }
+        );
         outputTrigger = ControlOutput("outputTrigger");
     }
 }

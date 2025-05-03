@@ -1,23 +1,29 @@
-using UnityEngine;
-using UnityEngine.UI;
-using DG.Tweening;
-using System.IO;
-using System.Collections.Generic;
 using System;
 using System.Collections;
-using TMPro;
+using System.Collections.Generic;
+using System.IO;
+using DG.Tweening;
 using Newtonsoft.Json;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class CutsceneService : MonoBehaviour
 {
-    [SerializeField] private Image slideshowImage;
+    [SerializeField]
+    private Image slideshowImage;
 
     private List<Sprite> slides = new();
     private int currentSlideIndex = 0;
 
-    [SerializeField] private TMP_Text subtitleText;
-    [SerializeField] private string jsonFilePath = "Subtitles/content"; // Resources path (no extension)
-    [SerializeField] private float typingSpeed = 0.08f; // seconds per character
+    [SerializeField]
+    private TMP_Text subtitleText;
+
+    [SerializeField]
+    private string jsonFilePath = "Subtitles/content"; // Resources path (no extension)
+
+    [SerializeField]
+    private float typingSpeed = 0.08f; // seconds per character
 
     private Coroutine currentCoroutine;
     private Dictionary<string, Subtitle> subtitlesDict;
