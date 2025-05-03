@@ -2,7 +2,7 @@ using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[UnitTitle("Show UI")]
+[UnitTitle("Enable UI")]
 public class ShowUINode : Unit
 {
     [DoNotSerialize]
@@ -18,7 +18,7 @@ public class ShowUINode : Unit
     [DoNotSerialize]
     public ValueInput Cutscene;
     [DoNotSerialize]
-    public ValueInput Glasses;
+    public ValueInput Blur;
     private HideService showUI;
 
     protected override void Definition()
@@ -29,7 +29,7 @@ public class ShowUINode : Unit
             showUI.Subtitles(flow.GetValue<bool>(Subtitles));
             showUI.Cutscene(flow.GetValue<bool>(Cutscene));
             showUI.History(flow.GetValue<bool>(History));
-            showUI.Blur(flow.GetValue<bool>(Glasses));
+            showUI.Blur(flow.GetValue<bool>(Blur));
             
             return outputTrigger;
         });
@@ -39,6 +39,6 @@ public class ShowUINode : Unit
         Subtitles = ValueInput<bool>("Subtitles", false);
         History = ValueInput<bool>("History", false);
         Cutscene = ValueInput<bool>("Cutscene", false);
-        Glasses = ValueInput<bool>("Glasses", false);
+        Blur = ValueInput<bool>("Blur", false);
     }
 }

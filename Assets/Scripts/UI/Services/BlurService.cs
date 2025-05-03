@@ -4,7 +4,8 @@ using UnityEngine.Rendering.PostProcessing;
 public class BlurService : MonoBehaviour
 {
     public PostProcessVolume volume;
-    private DepthOfField dof;
+
+    private bool blurEnabled = false;
 
     private void Awake() {
         Registry.Instance.Register(this);
@@ -17,15 +18,20 @@ public class BlurService : MonoBehaviour
             Debug.LogError("PostProcessVolume reference is missing!");
             return;
         }
+        ShowBlur(false);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            blurEnabled = !blurEnabled;
+            ShowBlur(blurEnabled);
+        }
     }
 
     public void ShowBlur(bool is_active)
     {
-        if (dof == null) return;
-
-        dof.active = is_active;
-        dof.focusDistance.value = 0.1f; // Closer focus = more blur for background
-        dof.aperture.value = 32f;       // Higher aperture = shallower depth of field
-        dof.focalLength.value = 50f;    // Can also play with this
+        volume.enabled = is_active;
     }
 }
