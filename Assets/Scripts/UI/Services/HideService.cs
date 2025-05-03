@@ -7,7 +7,6 @@ public class HideService : MonoBehaviour
     [SerializeField] private GameObject subtitles;
     [SerializeField] private GameObject history;
     [SerializeField] private GameObject cutscene;
-    [SerializeField] private BlurService blur;
 
 
     private void Awake()
@@ -19,7 +18,6 @@ public class HideService : MonoBehaviour
     public void Subtitles(bool value) => subtitles.SetActive(value);
     public void History(bool value) => history.SetActive(value);
     public void Cutscene(bool value) => cutscene.SetActive(value);
-    public void Blur(bool value) => blur.ShowBlur(value);
 
     public void HideAllUI()
     {
