@@ -7,14 +7,14 @@ public class CheckHandsNode : Unit
 {
     [DoNotSerialize]
     public ControlInput inputTrigger;
-    [DoNotSerialize]
 
+    [DoNotSerialize]
     public ControlOutput outputTriggerTrue;
-    [DoNotSerialize]
 
+    [DoNotSerialize]
     public ControlOutput outputTriggerFalse;
-    [DoNotSerialize]
 
+    [DoNotSerialize]
     public ValueInput item;
 
     private PlayerInteract player;
@@ -22,14 +22,18 @@ public class CheckHandsNode : Unit
 
     protected override void Definition()
     {
-        inputTrigger = ControlInput("inputTrigger", (flow) => { 
-            player = Registry.Instance.Get<PlayerInteract>();
-            itemService = Registry.Instance.Get<ItemService>();
-            if(player.GetHeldObject() == itemService[flow.GetValue<PlotItem>(item)])
-                return outputTriggerTrue; 
-            else
-                return outputTriggerFalse;
-        });
+        inputTrigger = ControlInput(
+            "inputTrigger",
+            (flow) =>
+            {
+                player = Registry.Instance.Get<PlayerInteract>();
+                itemService = Registry.Instance.Get<ItemService>();
+                if (player.GetHeldObject() == itemService[flow.GetValue<PlotItem>(item)])
+                    return outputTriggerTrue;
+                else
+                    return outputTriggerFalse;
+            }
+        );
         outputTriggerTrue = ControlOutput("True");
         outputTriggerFalse = ControlOutput("False");
         item = ValueInput<PlotItem>("PlotItem", PlotItem.FirstPaint);

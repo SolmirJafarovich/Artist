@@ -7,8 +7,10 @@ public class SubtitlesNode : Unit
 {
     [DoNotSerialize]
     public ControlInput inputTrigger;
+
     [DoNotSerialize]
     public ControlOutput outputTrigger;
+
     [DoNotSerialize]
     public ValueInput SubtitleKey;
 
@@ -22,10 +24,14 @@ public class SubtitlesNode : Unit
 
     protected override void Definition()
     {
-        inputTrigger = ControlInput("inputTrigger", (flow) => { 
-            ShowSubtitles(flow.GetValue<string>(SubtitleKey));
-            return outputTrigger; 
-        });
+        inputTrigger = ControlInput(
+            "inputTrigger",
+            (flow) =>
+            {
+                ShowSubtitles(flow.GetValue<string>(SubtitleKey));
+                return outputTrigger;
+            }
+        );
         outputTrigger = ControlOutput("outputTrigger");
         SubtitleKey = ValueInput<string>("SubtitleKey", string.Empty);
     }
