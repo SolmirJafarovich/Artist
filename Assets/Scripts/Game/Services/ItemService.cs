@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum PlotItem
 {
-    FirstPaint
+    FirstPaint,
 }
 
 [Serializable]
@@ -16,7 +16,8 @@ public class PlotItemEntry
 
 public class ItemService : MonoBehaviour
 {
-    [SerializeField] private List<PlotItemEntry> items;
+    [SerializeField]
+    private List<PlotItemEntry> items;
 
     private Dictionary<PlotItem, GameObject> _itemMap;
 

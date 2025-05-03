@@ -554,6 +554,7 @@ GameObject:
   - component: {fileID: 228613285}
   - component: {fileID: 228613284}
   - component: {fileID: 228613283}
+  - component: {fileID: 228613286}
   m_Layer: 0
   m_Name: Canvas_Painting_01 (6)
   m_TagString: Untagged
@@ -647,6 +648,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 228613281}
   m_Mesh: {fileID: -3491589828176227569, guid: 7a1dd57bd8b6ca44cbf5f922801b2975, type: 3}
+--- !u!114 &228613286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228613281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f57c7a8f27a367c849d76484142a22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  evt: 5
 --- !u!1 &264719516
 GameObject:
   m_ObjectHideFlags: 0
@@ -2606,6 +2620,7 @@ GameObject:
   - component: {fileID: 973891075}
   - component: {fileID: 973891074}
   - component: {fileID: 973891076}
+  - component: {fileID: 973891077}
   m_Layer: 0
   m_Name: FirstPaint
   m_TagString: Untagged
@@ -2750,6 +2765,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de6218a873d187844a05547aba856a7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &973891077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973891069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f57c7a8f27a367c849d76484142a22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  evt: 5
 --- !u!1 &985070208
 GameObject:
   m_ObjectHideFlags: 0
@@ -7886,6 +7914,7 @@ GameObject:
   - component: {fileID: 1998436973}
   - component: {fileID: 1998436972}
   - component: {fileID: 1998436971}
+  - component: {fileID: 1998436974}
   m_Layer: 0
   m_Name: Canvas_Painting_01 (12)
   m_TagString: Untagged
@@ -7979,6 +8008,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1998436969}
   m_Mesh: {fileID: -3491589828176227569, guid: 7a1dd57bd8b6ca44cbf5f922801b2975, type: 3}
+--- !u!114 &1998436974
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1998436969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 459e670816f13c7e0ae03e8430d04699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  evt: 6
 --- !u!1 &2005606710
 GameObject:
   m_ObjectHideFlags: 0
@@ -9059,6 +9101,7 @@ GameObject:
   - component: {fileID: 33952629650194341}
   - component: {fileID: 33952629650194340}
   - component: {fileID: 33952629650194339}
+  - component: {fileID: 33952629650194342}
   m_Layer: 0
   m_Name: ButcherKnife_a_01
   m_TagString: Untagged
@@ -9269,6 +9312,7 @@ GameObject:
   - component: {fileID: 33164750272478548}
   - component: {fileID: 33164750272478550}
   - component: {fileID: 33164750272478549}
+  - component: {fileID: 33164750272478551}
   m_Layer: 0
   m_Name: Knife_a_01
   m_TagString: Untagged
@@ -10194,6 +10238,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &33164750272478551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1826118552992655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e11878acfde316a42bc0799bcd124dd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnKnifeInteract:
+    m_PersistentCalls:
+      m_Calls:
+      - {m_Target: {fileID: 11400000, guid: 1fe60847e4026e5beb4c321e87a626df, type: 2}, m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine, m_MethodName: set_name, m_Mode: 5, m_Arguments: {m_ObjectArgument: {fileID: 0}, m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, m_IntArgument: 0, m_FloatArgument: 0, m_StringArgument: OnKnifeInteract, m_BoolArgument: 0}, m_CallState: 2}
+    m_CallsDirty: 1
 --- !u!33 &33187456011692383
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -10823,6 +10884,19 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 1c9c061acab414c409b2530a9af1e7e2, type: 3}
+--- !u!114 &33952629650194342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020599030193882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 459e670816f13c7e0ae03e8430d04699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  evt: 1
 --- !u!33 &33962857775878578
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -17985,6 +18059,7 @@ GameObject:
   - component: {fileID: 2020472600304785448}
   - component: {fileID: 2020472600304785450}
   - component: {fileID: 2020472600304785449}
+  - component: {fileID: 2020472600304785456}
   m_Layer: 0
   m_Name: DoorFrame_Apt_02
   m_TagString: Untagged
@@ -17992,6 +18067,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2020472600304785456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020472600304785455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 459e670816f13c7e0ae03e8430d04699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  evt: 2
 --- !u!33 &2020472600323046800
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -19826,6 +19914,7 @@ GameObject:
   - component: {fileID: 2020472600370473754}
   - component: {fileID: 2020472600370473753}
   - component: {fileID: 2020472600370473760}
+  - component: {fileID: 2020472600370473761}
   m_Layer: 0
   m_Name: Door.001
   m_TagString: Untagged
@@ -19845,22 +19934,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79599bbc60c7cfdc9aba47e172901d8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnEntranceDoorClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2072004587}
-        m_TargetAssemblyTypeName: Unity.VisualScripting.EventMachine`2[[Unity.VisualScripting.FlowGraph,
-          Unity.VisualScripting.Flow
-        m_MethodName: TriggerUnityEvent
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: OnEntranceDoorClick
-          m_BoolArgument: 0
-        m_CallState: 2
+--- !u!114 &2020472600370473761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020472600370473759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 459e670816f13c7e0ae03e8430d04699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  evt: 7
 --- !u!33 &2020472600370834216
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -32531,6 +32617,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2020472600726257977}
+  - component: {fileID: 2020472600726257978}
   m_Layer: 0
   m_Name: Furniture
   m_TagString: Untagged
@@ -32556,6 +32643,19 @@ Transform:
   - {fileID: 2020472602304128664}
   m_Father: {fileID: 2020472602097409640}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2020472600726257978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020472600726257976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 459e670816f13c7e0ae03e8430d04699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  evt: 4
 --- !u!95 &2020472600729442980
 Animator:
   serializedVersion: 5
@@ -44831,6 +44931,8 @@ GameObject:
   - component: {fileID: 2020472601144946990}
   - component: {fileID: 2020472601144946989}
   - component: {fileID: 2020472601144946988}
+  - component: {fileID: 2020472601144946992}
+  - component: {fileID: 2020472601144946993}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -44960,6 +45062,31 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2020472601144946992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020472601144946978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd33ff51df9e98e4ea8dd19740e69b07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2020472601144946993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020472601144946978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 459e670816f13c7e0ae03e8430d04699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  evt: 0
 --- !u!1 &2020472601150551306
 GameObject:
   m_ObjectHideFlags: 0
@@ -49905,6 +50032,7 @@ GameObject:
   - component: {fileID: 2020472601277661983}
   - component: {fileID: 2020472601277661982}
   - component: {fileID: 2020472601277661981}
+  - component: {fileID: 2020472601277661984}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -50034,6 +50162,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.08593076, y: 2.8386579, z: 1.4261861}
   m_Center: {x: -0.0429652, y: 0.05660838, z: 0.7114758}
+--- !u!114 &2020472601277661984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020472601277661971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 459e670816f13c7e0ae03e8430d04699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  evt: 3
 --- !u!1 &2020472601283507242
 GameObject:
   m_ObjectHideFlags: 0
